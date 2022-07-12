@@ -19,12 +19,24 @@
 // console.log(palindrome('a'));
 
 // //////////// reverse int//////////
-const pali = (str) => {
-	const arr = str.split('').reverse().join('');
-	if (str === arr) return true;
-	else return false;
+// const revInt = (int) => {
+// 	const stt = String(int);
+// 	const abb = Number(stt.split('').reverse().join(''));
+// 	return abb;
+// };
+
+const revInt = (int) => {
+	const abb = int.toString().split('').reverse().join('');
+	const zxx = parseInt(abb);
+	if (int < 0) {
+		return zxx * -1;
+	} else {
+		return zxx;
+	}
 };
-console.log(pali('humna'));
-console.log(pali('abc'));
-console.log(pali('12321'));
-console.log(pali('abba'));
+
+console.log(revInt(15));
+console.log(revInt(981));
+console.log(revInt(500));
+console.log(revInt(-15));
+console.log(revInt(-90));
