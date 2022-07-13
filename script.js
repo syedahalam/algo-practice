@@ -1,25 +1,30 @@
-const anagrams = (stringA, stringB) => {
-	const aCharMap = buildCharMap(stringA);
-	const bCharMap = buildCharMap(stringB);
+// const anagram = (stringA, stringB) => {
+// 	const aCharMap = cleanUp(stringA);
+// 	const bCharMap = cleanUp(stringB);
 
-	if (Object.keys(aCharMap).length !== Object.keys(bCharMap).length) {
-		return false;
-	}
+// 	if (Object.keys(aCharMap).length !== Object.keys(bCharMap).length) {
+// 		return false;
+// 	}
+// 	for (let char in aCharMap) {
+// 		if (aCharMap[char] !== bCharMap[char]) {
+// 			return false;
+// 		}
+// 	}
+// 	return true;
+// };
+// const cleanUp = (str) => {
+// // 	const charMap = {};
+// // 	for (let char of str) {
+// // 		charMap[char] = charMap[char] + 1 || 1;
+// // 	}
+// // 	return charMap;
+// // };
 
-	for (let char in aCharMap) {
-		if (aCharMap[char] !== bCharMap[char]) {
-			return false;
-		}
-	}
-	return true;
-};
+// const anagram = (stringA, stringB) => {
+// 	return cleanUp(stringA) === cleanUp(stringB);
+// };
+// const cleanUp = (str) => {
+// 	return str.replace(/[^\w]/g, '').toLowerCase().split('').sort().join('');
+// };
 
-const buildCharMap = (str) => {
-	const charMap = {};
-	for (let char of str.replace(/[^\w]/g, '').toLowerCase()) {
-		charMap[char] = charMap[char] + 1 || 1;
-	}
-	return charMap;
-};
-
-console.log(anagrams('hello', 'hell'));
+// console.log(anagram('hello', 'hell'));
