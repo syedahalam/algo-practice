@@ -1,14 +1,25 @@
-const chunk = (array, size) => {
-	const chunked = [];
+const anagrams = (stringA, stringB) => {
+	const aCharMap = buildCharMap(stringA);
+	const bCharMap = buildCharMap(stringB);
 
-	for (let element of array) {
-		const last = chunked[chunked.length - 1];
-		if (!last || last.length === size) {
-			chunked.push([element]);
-		} else {
-			last.push(element);
+	if (Object.keys(aCharMap).length !== Object.keys(bCharMap).length) {
+		return false;
+	}
+
+	for (let char in aCharMap) {
+		if (aCharMap[char] !== bCharMap[char]) {
+			return false;
 		}
 	}
-	return chunked;
+	return true;
 };
-console.log(chunk([1, 2, 3, 4, 5, 6], 3));
+
+const buildCharMap = (str) => {
+	const charMap = {};
+	for (let char of str.replace(/[^\w]/g, '').toLowerCase()) {
+		charMap[char] = charMap[char] + 1 || 1;
+	}
+	return charMap;
+};
+
+console.log(anagrams('hello', 'hell'));
