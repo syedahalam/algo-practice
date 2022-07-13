@@ -1,21 +1,9 @@
-const maxChar = (str) => {
-	const charMap = {};
-	let max = 0;
-	let maxChar = '';
-	for (let char of str) {
-		if (charMap[char]) {
-			charMap[char]++;
-		} else {
-			charMap[char] = 1;
-		}
+const fizzBuzz = (n) => {
+	for (let i = 1; i <= n; i++) {
+		if (i % 15 === 0) console.log('fizzbuzz');
+		if (i % 3 === 0) console.log('fizz');
+		if (i % 5 === 0) console.log('buzz');
+		else console.log(i);
 	}
-	for (let char in charMap) {
-		if (charMap[char] > max) {
-			max = charMap[char];
-			maxChar = char;
-		}
-	}
-	return maxChar;
 };
-console.log(maxChar('hello'));
-console.log(maxChar('hello humna hi mommy'));
+fizzBuzz(20);
