@@ -1,19 +1,42 @@
-const vowels = (str) => {
-	const letters = ['a', 'e', 'i', 'o', 'u'];
-	let counter = 0;
-
-	for (let char of str) {
-		if (letters.includes(char)) {
-			counter++;
-			console.log(char);
-		}
+const matrix = (n) => {
+	const results = [];
+	for (let i = 0; i < n; i++) {
+		results.push([]);
 	}
-	return counter;
-};
-console.log(vowels('humna'));
+	let counter = 1;
+	let startRow = 0;
+	let endRow = n - 1;
+	let startColumn = 0;
+	let endColumn = n - 1;
+	while (startRow <= endRow && startColumn <= endColumn) {
+		// top row
+		for (let i = startColumn; i <= endColumn; i++) {
+			results[startRow][i] = counter;
+			counter++;
+		}
+		startRow++;
 
-const vowels1 = (str) => {
-	const matches = str.match(/[aeiou]/gi);
-	return matches ? matches.length : 0;
+		// right column
+		for (let i = startRow; i <= endRow; i++) {
+			results[i][endColumn] = counter;
+			counter++;
+		}
+		endColumn--;
+
+		// bottom row
+		for (let i = endColumn; i >= startColumn; i--) {
+			results[endRow][i] = counter;
+			counter++;
+		}
+		endRow--;
+
+		// column
+		for (let i = endRow; i >= startRow; i--) {
+			results[i][startColumn] = counter;
+			counter++;
+		}
+		startColumn++;
+	}
+	return results;
 };
-console.log(vowels1('humna'));
+console.log(matrix(3));
