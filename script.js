@@ -1,12 +1,14 @@
-const weave = (sourceOne, sourceTwo) => {
-	const q = new Queue();
-	while (sourceOne.peek() || sourceTwo.peek()) {
-		if (sourceOne.peek()) {
-			q.add(sourceOne.remove());
-		}
-		if (sourceTwo.peek()) {
-			q.add(sourceTwo.remove());
-		}
+class Stack {
+	constructor() {
+		this.data = [];
 	}
-	return q;
-};
+	push(record) {
+		this.data.push(record);
+	}
+	pop() {
+		return this.data.pop();
+	}
+	peek() {
+		return this.data[this.data.length - 1];
+	}
+}
