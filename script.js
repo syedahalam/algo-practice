@@ -28,7 +28,7 @@ const charMax = (str) => {
 	}
 	return charMax;
 };
-// console.log(charMax('he1112222555555555llo'));
+// console.log(charMax('hello'));
 
 const chunkArray = (array, size) => {
 	const chunked = [];
@@ -42,7 +42,7 @@ const chunkArray = (array, size) => {
 	}
 	return chunked;
 };
-// console.log(chunkArray([1, 2, 3, 4, 5, 6, 7, 8, 9], 3));
+// console.log(chunkArray([1, 2, 3, 4, 5, 6, 7], 4));
 
 // const anagrams = (stringA, stringB) => {
 // 	return cleanUp(stringA) === cleanUp(stringB);
@@ -73,7 +73,7 @@ const buildMap = (str) => {
 	}
 	return charMap;
 };
-// console.log(anagrams('hello', 'hello'));
+// console.log(anagrams('hello', 'hell'));
 
 // const fizzBuzz = (n) => {
 // 	for (let i = 1; i <= n; i++) {
@@ -90,20 +90,19 @@ const buildMap = (str) => {
 // };
 // fizzBuzz(15);
 
-const capitalization = (str) => {
-	let words = [];
-	for (let word of str.split(' ')) {
-		words.push(word[0].toUpperCase() + word.slice(1));
-	}
-	return words.join(' ');
-};
-// console.log(capitalization('hello humna how are you?'));
-
+// const capitalization = (str) => {
+// 	const words = [];
+// 	for (let word of str.split(' ')) {
+// 		words.push(word[0].toUpperCase() + word.slice(1));
+// 	}
+// 	return words.join(' ');
+// };
+// console.log(capitalization('hi how are you?'));
 // const steps = (n) => {
 // 	for (let rows = 0; rows <= n; rows++) {
 // 		let stairs = '';
 // 		for (let columns = 0; columns <= n; columns++) {
-// 			if (columns <= rows) {
+// 			if (columns < rows) {
 // 				stairs += '#';
 // 			} else {
 // 				stairs += ' ';
@@ -131,29 +130,29 @@ const capitalization = (str) => {
 // pyramid(6);
 
 // const vowels = (str) => {
+// 	const letters = ['a', 'e', 'i', 'o', 'u'];
+// 	let counter = 0;
+// 	for (let char of str.toLowerCase()) {
+// 		if (letters.includes(char)) {
+// 			counter++;
+// 		}
+// 	}
+// 	return counter;
+// };
+// console.log(vowels('humna'));
+
+// const vowels = (str) => {
 // 	const matches = str.match(/[aeiou]/gi);
 // 	return matches ? matches.length : 0;
 // };
 // console.log(vowels('humna'));
 
-const vowels = (str) => {
-	let counter = 0;
-	const letters = ['a', 'e', 'i', 'o', 'u'];
-	for (let char of str.toLowerCase()) {
-		if (letters.includes(char)) {
-			counter++;
-		}
-	}
-	return counter;
-};
-// console.log(vowels('humna'));
-
 const matrix = (n) => {
-	let results = [];
-	for (let i = 0; i < n; i++) {
-		results.push([]);
+	const result = [];
+	for (let i = 0; i <= n; i++) {
+		result.push([]);
 	}
-	let count = 1;
+	let counter = 1;
 	let startRow = 0;
 	let endRow = n - 1;
 	let startColumn = 0;
@@ -161,136 +160,62 @@ const matrix = (n) => {
 	while (startRow <= endRow && startColumn <= endColumn) {
 		// top row
 		for (let i = startColumn; i <= endColumn; i++) {
-			results[startRow][i] = count;
-			count++;
+			result[startRow][i] = counter;
+			counter++;
 		}
 		startRow++;
 
 		// right Column
 		for (let i = startRow; i <= endRow; i++) {
-			results[i][endColumn] = count;
-			count++;
+			result[i][endColumn] = counter;
+			counter++;
 		}
 		endColumn--;
 
-		// bottom row
+		// bottom Row
 		for (let i = endColumn; i >= startColumn; i--) {
-			results[endRow][i] = count;
-			count++;
+			result[endRow][i] = counter;
+			counter++;
 		}
 		endRow--;
 
 		// left column
-
 		for (let i = endRow; i >= startRow; i--) {
-			results[i][startColumn] = count;
-			count++;
+			result[i][startColumn] = counter;
+			counter++;
 		}
 		startColumn++;
 	}
-	return results;
+	return result;
 };
 // console.log(matrix(6));
 
 // const fib = (n) => {
-// 	const result = [0, 1];
+// 	const array = [0, 1];
 // 	for (let i = 2; i <= n; i++) {
-// 		const a = result[i - 1];
-// 		const b = result[i - 2];
-// 		result.push(a + b);
+// 		const a = array[i - 1];
+// 		const b = array[i - 2];
+// 		array.push(a + b);
 // 	}
-// 	return result[n];
+// 	return array[n];
 // };
-// console.log(fib(4));
+// console.log(fib(6));
 
-const memoize = (fib) => {
-	const cache = {};
-	return (...args) => {
-		if (cache[args]) {
-			return cache[args];
-		}
-		const result = fib.apply(this, args);
-		return result;
-	};
-};
-
-const slowfib = (n) => {
-	if (n < 2) return n;
-	else return slowfib(n - 1) + slowfib(n - 2);
-};
-const fib = memoize(slowfib);
-// console.log(fib(4));
-
-// class Queue {
-// 	constructor() {
-// 		this.data = [];
+// const memoize = (fib) => {
+// 	const cache = {};
+// 	return (...args) => {
+// 		if (cache[args]) {
+// 			return cache[args];
+// 		}
+// 		const result = fib.apply(this, args);
+// 		return result;
+// 	};
+// };
+// const slowfib = (n) => {
+// 	if (n < 2) {
+// 		return n;
 // 	}
-// 	add(record) {
-// 		this.unshift(record);
-// 	}
-// 	remove() {
-// 		return this.data.pop();
-// 	}
-// }
-
-// class Queue {
-// 	constructor() {
-// 		this.data = [];
-// 	}
-// 	add(record) {
-// 		this.unshift(record);
-// 	}
-// 	remove() {
-// 		return this.data.pop();
-// 	}
-// 	peek() {
-// 		return this.data[this.data.length - 1];
-// 	}
-// }
-
-// class Stack {
-// 	constructor() {
-// 		this.data = [];
-// 	}
-// 	add(record) {
-// 		this.push(record);
-// 	}
-// 	pop() {
-// 		return this.data.pop();
-// 	}
-// 	peek() {
-// 		return this.data[this.data.length - 1];
-// 	}
-// }
-
-class Queue {
-	constructor() {
-		this.first = new Stack();
-		this.second = new Stack();
-	}
-	add(record) {
-		this.first.push(record);
-	}
-	remove() {
-		while (this.first.peek()) {
-			this.second.push(this.first.pop());
-		}
-		const record = this.second.pop();
-
-		while (this.second.peek()) {
-			this.first.push(this.second.pop());
-		}
-		return record;
-	}
-	peek() {
-		while (this.first.peek()) {
-			this.second.push(this.first.pop());
-		}
-		const record = this.second.peek();
-
-		while (this.second.peek()) {
-			this.first.push(this.second.pop());
-		}
-		return record;
-	}
-}
+// 	return slowfib(n - 1) + slowfib(n - 2);
+// };
+// const fib = memoize(slowfib);
+// console.log(fib(6));
