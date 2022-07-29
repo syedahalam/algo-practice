@@ -46,10 +46,11 @@ class LinkedList {
 	}
 	removeLast() {
 		if (!this.head) {
-			return;
+			return null;
 		}
 		if (!this.head.next) {
 			this.head = null;
+			return;
 		}
 		let previous = this.head;
 		let node = this.head.next;
@@ -60,11 +61,11 @@ class LinkedList {
 		previous.next = null;
 	}
 	insertLast(data) {
-		let last = this.getLast(data);
+		let last = this.getLast();
 		if (last) {
 			last.next = new Node(data);
 		} else {
-			this.head = new Node(data);
+			this.head = new Node(data, this.head);
 		}
 	}
 	getAt(index) {
@@ -79,18 +80,11 @@ class LinkedList {
 		}
 		return null;
 	}
-	removeAt(index) {
+	removeAt() {
 		if (!this.head) {
 			return;
 		}
 		if (index === 0) {
-			this.head = this.head.next;
-			return;
 		}
-		let previous = this.getAt(index - 1);
-		if (!previous || !previous.next) {
-			return;
-		}
-		previous.next = previous.next.next;
 	}
 }
