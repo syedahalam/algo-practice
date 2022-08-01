@@ -1,83 +1,150 @@
-class Queue {
-	constructor() {
-		this.data = [];
-	}
-	add(record) {
-		this.data.unshift(record);
-	}
-	remove() {
-		return this.data.pop();
+class Node {
+	constructor(data, next = null) {
+		this.head = data;
+		this.next = next;
 	}
 }
-class Queue {
+class LinkedList {
 	constructor() {
-		this.data = [];
+		this.head = null;
 	}
-	add(record) {
-		this.data.unshift(record);
+	insertFirst(data) {
+		const node = new Node(data);
 	}
-	remove() {
-		return this.data.pop();
+	size() {
+		let counter = 0;
+		let node = this.head;
+		while (node) {
+			counter++;
+			node = node.next;
+		}
+		return counter;
 	}
-	peek() {
-		return this.data[this.data.length - 1];
+	getFirst() {
+		return this.head;
+	}
+	getLast() {
+		if (!this.head) {
+			return false;
+		}
+		let node = this.head;
+		while (node) {
+			if (!node.next) {
+				return node;
+			}
+			node = node.next;
+		}
+	}
+	clear() {
+		this.head = null;
+	}
+	removeFirst() {
+		if (!this.head) {
+			return;
+		}
+		this.head = this.head.next;
+	}
+	removeLast() {
+		if (!this.head) {
+			return null;
+		}
+		if (!this.head.next) {
+			this.head = null;
+			return;
+		}
+		const prev = this.head;
+		const node = this.head.next;
+		while (node) {
+			prev = node;
+			node = node.next;
+		}
+		prev.next = null;
+	}
+	insertLast(data) {
+		const last = this.getLast();
+		if (last) {
+			last.next = new Node(data);
+		} else {
+			this.head = new Node(data);
+		}
+	}
+	getAt(index) {
+		let counter = 0;
+		let node = this.head;
+		while (node) {
+			if (counter === index) {
+				return node;
+			}
+			counter++;
+			node = node.next;
+		}
+		return null;
+	}
+	removeAt(index) {
+		if (!this.head) {
+			return null;
+		}
+		if (index === 0) {
+			this.head = this.head.next;
+			return;
+		}
+		const previous = this.getAt(index) - 1;
+		if (!previous || !previous.next) {
+			return;
+		}
+		previous.next = previous.next.next;
+	}
+	insertAt(data, index) {
+		if (!this.head) {
+			this.head = new Node(data);
+			return;
+		}
+		if (index === 0) {
+			this.head = new Node(data, this.head);
+			return;
+		}
+		const previous = this.getAt(index - 1);
+		const node = new Node(data, previous.next);
+		previous.next = node;
 	}
 }
+const midpoint = (LinkedList) => {
+	let slow = LinkedList.getFirst();
+	let fast = LinkedList.getFirst();
 
-const weave = (sourceOne, sourceTwo) => {
-	const q = new Queue();
-	while (sourceOne.peek() || sourceTwo.peek()) {
-		if (sourceOne.peek()) {
-			q.add(sourceOne.remove());
-		}
-		if (sourceTwo.peek()) {
-			q.add(sourceTwo.remove());
-		}
+	while (fast.next && fast.next.next) {
+		slow = slow.next;
+		fast = fast.next.next;
 	}
-	return q;
+	return slow;
 };
-class Stack {
-	constructor() {
-		this.data = [];
-	}
-	add(record) {
-		this.data.push(record);
-	}
-	remove() {
-		return this.data.pop();
-	}
-	peek() {
-		return this.data[this.data.length - 1];
-	}
-}
 
-class Queue {
-	constructor() {
-		this.first = new Stack();
-		this.second = new Stack();
-	}
-	add(record) {
-		this.first.push(record);
-	}
-	remove() {
-		while (this.first.peek()) {
-			this.second.push(this.first.pop());
-		}
-		const record = this.second.pop;
+const circularList = (LinkedList) => {
+	const slow = LinkedList.getFirst();
+	const fast = LinkedList.getFirst();
 
-		while (this.second.peek()) {
-			this.first.push(this.second.pop);
+	while (fast.next && fast.next.next) {
+		slow = slow.next;
+		fast = fast.next.next;
+
+		if (slow === fast) {
+			return true;
 		}
-		return record;
 	}
-	peek() {
-		while (this.first.peek()) {
-			this.second.push(this.first.pop());
-		}
-		const record = this.second.peek();
-		while (this.second.peek()) {
-			this.first.push(this.second.pop());
-		}
-		return record;
+	return null;
+};
+
+const stepFromTail = (LinkedList, n) => {
+	const slow = LinkedList.getFirst();
+	const fast = LinkedList.getFirst();
+
+	while (n > 0) {
+		fast = fast.next;
+		n--;
 	}
-}
+	while (fast.next) {
+		slow = slow.next;
+		fast = fast.next;
+	}
+	return slow;
+};
