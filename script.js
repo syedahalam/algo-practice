@@ -1,56 +1,33 @@
-const bubbleSort = (arr) => {
-	for (let i = 0; i < arr.length; i++) {
-		for (let j = 0; j < arr.length - i - 1; j++) {
-			if (arr[j] > arr[j + 1]) {
-				const lesser = arr[j + 1];
-				arr[j + 1] = arr[j];
-				arr[j] = lesser;
-			}
+const rev = (str) => str.split('').reverse().join('');
+// console.log(rev('hello'));
+
+const palindrome = (str) => {
+	const aqq = str.split('').reverse().join('');
+	return aqq === str;
+};
+// console.log(palindrome('abba'));
+
+const revInt = (n) => {
+	const aqq = n.toString().split('').reverse().join('');
+	return parseInt(aqq) * Math.sign(n);
+};
+// console.log(revInt(-15));
+
+const charMax = (str) => {
+	const charMap = {};
+	let max = 0;
+	let charMax = '';
+	for (let char of str.toLowerCase()) {
+		charMap[char] = charMap[char] + 1 || 1;
+	}
+	for (let char in charMap) {
+		if (charMap[char] > max) {
+			max = charMap[char];
+			charMax = char;
 		}
 	}
-	return arr;
+	return charMax;
 };
-// console.log(bubbleSort([23, 11, 6, 0]));
+// console.log(charMax('hello11155555555'));
 
-const selectionSort = (arr) => {
-	for (let i = 0; i < arr.length; i++) {
-		let indexOfMin = i;
-
-		for (let j = i + 1; j < arr.length; j++) {
-			if (arr[j] < arr[indexOfMin]) {
-				indexOfMin = j;
-			}
-		}
-		if (indexOfMin !== i) {
-			let lesser = arr[indexOfMin];
-			arr[indexOfMin] = arr[i];
-			arr[i] = lesser;
-		}
-	}
-	return arr;
-};
-// console.log(selectionSort([23, 1, 56]));
-
-const mergeSort = (arr) => {
-	if (arr.length === 1) {
-		return arr;
-	}
-	const center = Math.floor(arr.length / 2);
-	const left = arr.slice(0, center);
-	const right = arr.slice(center);
-
-	return merge(mergeSort(left), mergeSort(right));
-};
-
-const merge = (left, right) => {
-	const results = [];
-	while (left.length && right.length) {
-		if (left[0] < right[0]) {
-			results.push(left.shift());
-		} else {
-			results.push(right.shift());
-		}
-	}
-	return [...results, ...left, ...right];
-};
-console.log(mergeSort([23, 1, 43, 7, 44]));
+const chunkArray = (array, size) => {};
